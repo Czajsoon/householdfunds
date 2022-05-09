@@ -1,0 +1,63 @@
+<div class="container">
+  <div class="row">
+    <div class="col-5 justify-content-center" [formGroup]="typeGroup">
+      <h4 class="text-center title">Dodaj typ zakupów</h4>
+      <div class="vertical-center">
+        <div class="row">
+          <img src="./assets/shoppingType.jpg" alt="paymentGraphic">
+        </div>
+        <div class="row">
+          <div class="p-inputgroup paymentName">
+            <span class="p-float-label">
+              <input id="paymentName" pInputText class="text-center" formControlName="name">
+              <label for="paymentName" class="justify-content-center text-center">Nazwa typu*</label>
+            </span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="justify-content-center text-center addPayment">
+            <button pButton pRipple type="button" icon="pi pi-plus" (click)="addType()"
+                    [disabled]="typeGroup.invalid" label="Dodaj"
+                    class="p-button-info w-100"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-2 justify-content-center title">
+      <p-divider layout="vertical"></p-divider>
+    </div>
+    <div class="col-5 justify-content-center">
+      <h4 class="text-center title">Twoje typy zakupów</h4>
+      <div class="methodes" *ngFor="let method of types;let i = index">
+        <div class="row">
+          <div class="col-10">
+            <div class="p-inputgroup paymentName">
+            <span class="p-float-label">
+              <input id="payment" pInputText [readonly]="method.fromSystem" [value]="method.name" class="text-center">
+              <label for="payment" class="justify-content-center text-center">Nazwa typu</label>
+            </span>
+            </div>
+          </div>
+          <div class="col-1">
+            <div class="w-100 justify-content-center text-center action">
+              <button pButton pRipple type="button" [disabled]="method.fromSystem" icon="pi pi-pencil"
+                      class="p-button-rounded p-button-help"></button>
+            </div>
+          </div>
+          <div class="col-1">
+            <div class="w-100 justify-content-center text-center action">
+              <button pButton pRipple type="button" (click)="delete(i)" [disabled]="method.fromSystem"
+                      icon="pi pi-trash"
+                      class="p-button-rounded p-button-danger"></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="speeddial-delay-demo dial shadow">
+  <p-speedDial [model]="items" direction="up" [transitionDelay]="80" showIcon="pi pi-bars" hideIcon="pi pi-times"
+               buttonClassName="p-button"></p-speedDial>
+</div>
+<p-toast></p-toast>
